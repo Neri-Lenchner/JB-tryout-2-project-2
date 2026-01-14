@@ -53,14 +53,28 @@ setTimeout((): void => {
 ─────────────────────────────────────────────── */
 
 /**
- * Home button: clears chart if active, clears monitor, shows main currency list (page 2)
+ * Home button handler:
+ * - Stops any running live crypto chart if the chart container exists
+ * - Clears the current content in the pages monitor
+ * - Renders the main currency list page (page 2)
+ * - If the currency list has more than 100 items (large dataset),
+ *   shows a loading animation for 600 ms while rendering to improve perceived performance
+ * - For smaller lists (≤ 100 items), renders instantly without loader
  */
 homeButton.onclick = (): void => {
   if (document.querySelector('#chartContainer')) {
     stopCryptoChart();
   }
   clearPagesFromMonitor();
-  renderPage2();
+  if (manager.currencyList.length > 100) {
+    manager.show();
+    setTimeout(() => {
+      renderPage2();
+      manager.hide();
+    }, 600);
+  } else {
+    renderPage2();
+  }
 };
 
 /**
@@ -141,7 +155,7 @@ function renderPage2(): void{
   const listContainer:HTMLDivElement = document.createElement('div');
   listContainer.className = 'pages-monitor';
   pagesMonitor?.appendChild(listContainer);
-  const currencyList: Currency[] = manager.currencyList.slice(0, 99);
+  const currencyList: Currency[] = manager.currencyList;
   renderCurrencyList(currencyList, listContainer);
 }
 

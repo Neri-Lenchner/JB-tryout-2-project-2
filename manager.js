@@ -15,6 +15,7 @@ class Manager {
      * @returns {Promise<void>}
      */
     async getCurrencyList() {
+        // 'shitCoinsUrl' is what it is- "more is less", I left it there but as a second option //
         const shitCoinsUrl = 'https://api.coingecko.com/api/v3/coins/list';
         const goodCoinsUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1';
         this.show();
