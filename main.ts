@@ -83,6 +83,7 @@ homeButton.onclick = (): void => {
  */
 liveReportsButton.onclick = (): void => {
   if (selectedCurrencies.length === 0) {
+    alert('Please select at list one currency');
     return;
   }
   stopCryptoChart();
