@@ -1,23 +1,48 @@
 import { manager } from './manager.js';
 import { Currency } from "./currency.model.js";
+/**
+ * DOM references and event listeners setup
+ */
 const pagesMonitor = document.getElementById('pages-monitor');
-/////////////////////////////////////////-SCROLL TO LOAD CONTENT MOTHER FUCKER-//////////////////////////////
+/**
+ * Main scrollable container reference (used for initial scroll position)
+ */
 const container = document.getElementById('scroll-container');
+/**
+ * Navigation and action buttons
+ */
 const searchButton = document.querySelector('#search-button');
 const aboutButton = document.querySelector('#about-button');
 const homeButton = document.querySelector('#home-button');
 const liveReportsButton = document.querySelector('#live-reports-button');
+/**
+ * Main search input field
+ */
 const mainInput = document.querySelector('#main-input');
+/**
+ * CryptoCompare API key (used for live price fetching in charts)
+ */
 const myApiKey = '785e25aa48363b73d265706d01aaf5b730d0f78a58578a8ab52f211ae73e2293';
+/**
+ * Enter key in main input triggers search
+ */
 mainInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
         search();
     }
 });
+/**
+ * Initial scroll position adjustment after DOM is ready
+ */
 setTimeout(() => {
     container.scrollTop = 590;
 }, 0);
-///---Buttons Functionality blat mother fuckersssss---///
+/* ───────────────────────────────────────────────
+   Navigation Button Handlers
+─────────────────────────────────────────────── */
+/**
+ * Home button: clears chart if active, clears monitor, shows main currency list (page 2)
+ */
 homeButton.onclick = () => {
     if (document.querySelector('#chartContainer')) {
         stopCryptoChart();
@@ -25,6 +50,10 @@ homeButton.onclick = () => {
     clearPagesFromMonitor();
     renderPage2();
 };
+/**
+ * Live Reports button: stops any running chart, clears monitor,
+ * builds chart container, and starts live price chart for up to 5 selected currencies
+ */
 liveReportsButton.onclick = () => {
     if (selectedCurrencies.length === 0) {
         return;
@@ -45,6 +74,9 @@ liveReportsButton.onclick = () => {
     pagesMonitor?.appendChild(chartDiv);
     startCryptoChart(fiveSymbols[0], fiveSymbols[1], fiveSymbols[2], fiveSymbols[3], fiveSymbols[4], myApiKey);
 };
+/**
+ * Search button: stops chart if active, triggers search for a single currency symbol
+ */
 searchButton.onclick = () => {
     if (document.querySelector('#chartContainer')) {
         stopCryptoChart();
@@ -52,6 +84,9 @@ searchButton.onclick = () => {
     search();
     // console.log(oneCurrencyArr);   // ← this line can probably be removed too later
 };
+/**
+ * About button: stops chart if active, clears monitor, renders personal about page (page 3)
+ */
 aboutButton.onclick = () => {
     if (document.querySelector('#chartContainer')) {
         stopCryptoChart();
@@ -59,10 +94,25 @@ aboutButton.onclick = () => {
     clearPagesFromMonitor();
     renderPage3();
 };
-//////////////////////////////////////////-END OF LOADING STUFF-/////////////////////////////////////////////
+/* ───────────────────────────────────────────────
+   Global state for selected currencies & limit handling
+─────────────────────────────────────────────── */
+/**
+ * Array of currently selected currencies for live reporting (max 5)
+ */
 const selectedCurrencies = [];
+/**
+ * Temporary reference to a 6th currency the user is trying to select
+ * (triggers limit popup / selection manager)
+ */
 let pendingSixth = null;
-/*-------------------------------------RENDER-PAGE-2-MOTHER-FUCKER!!!!!----------------------------------*/
+/* ───────────────────────────────────────────────
+   Page rendering functions
+─────────────────────────────────────────────── */
+/**
+ * Renders the main currency list page (top 99 coins from manager)
+ * Clears monitor and displays cards for selection
+ */
 function renderPage2() {
     const listContainer = document.createElement('div');
     listContainer.className = 'pages-monitor';
@@ -70,8 +120,10 @@ function renderPage2() {
     const currencyList = manager.currencyList.slice(0, 99);
     renderCurrencyList(currencyList, listContainer);
 }
-/*----------------------------------END-OF-renderPage2-Thank-God-----------------------------------------*/
-/*--------------------------RENDER-PAGE-3-MOTHER-FUCKER!!!!!-----------------------------*/
+/**
+ * Renders the "About Me" static page with text and image
+ * Clears monitor first, then builds layout
+ */
 function renderPage3() {
     clearPagesFromMonitor();
     const container = document.createElement('div');
@@ -79,7 +131,6 @@ function renderPage3() {
     const title = document.createElement('h1');
     title.className = 'about-headline';
     title.textContent = 'About-Me';
-    // Stuff about me allegedly:
     const text = document.createElement('p');
     text.className = 'about';
     text.textContent = 'I am a young web developer who intends to integrate all the rich life experience he has accumulated, over the thousand years that have passed him, into the amazing humble art of web development. Born in 1977 and been making music most of my life, I see web development as a direct continuation of my previous occupation and I find this new occupation mind-blowing';
@@ -100,12 +151,18 @@ function renderPage3() {
     page3Container.append(title, midSectionAbout);
     pagesMonitor?.appendChild(page3Container);
 }
-/*----------------------------------END-OF-renderPage3-Thank-God-----------------------------------------*/
 /*-------------------------------------RENDER-PAGE-4-MOTHER-FUCKER!!!!!----------------------------------*/
 let chart; // that fucker comes from canvas js //
 let updateIntervalId = null;
 const maxPoints = 20;
-// Y axis
+/* ───────────────────────────────────────────────
+   Chart axis formatters
+─────────────────────────────────────────────── */
+/**
+ * Formats Y-axis values with K/M/B suffixes and $ prefix
+ * @param e - CanvasJS event object containing the value
+ * @returns Formatted string like "$1.23M"
+ */
 function addSymbols(e) {
     const suffixes = ["", "K", "M", "B"];
     let order = Math.max(Math.floor(Math.log(Math.abs(e.value)) / Math.log(1000)), 0);
@@ -114,14 +171,23 @@ function addSymbols(e) {
     const formattedValue = CanvasJS.formatNumber(e.value / Math.pow(1000, order));
     return "$" + formattedValue + suffixes[order];
 }
-// X axis
+/**
+ * Formats X-axis time labels as HH:mm:ss
+ * @param e - CanvasJS event object containing the Date
+ * @returns String like "14:35:22"
+ */
 function formatTimeLabel(e) {
     const h = String(e.value.getHours()).padStart(2, "0");
     const m = String(e.value.getMinutes()).padStart(2, "0");
     const s = String(e.value.getSeconds()).padStart(2, "0");
     return `${h}:${m}:${s}`;
 }
-// THE MAIN FUNCTION FOR THE FUCKIN' FRIKIN' CRYING OUT LOUD!!!!! :
+/**
+ * Starts live updating line chart for up to 5 cryptocurrencies using CanvasJS
+ * Fetches prices every 2 seconds via CryptoCompare, keeps only last 20 points
+ * @param currency1..currency5 - Symbol strings (e.g. "BTC", "ETH")
+ * @param apiKey - Optional CryptoCompare API key
+ */
 function startCryptoChart(currency1, currency2, currency3, currency4, currency5, apiKey) {
     const coins = [currency1, currency2, currency3, currency4, currency5];
     const colors = ["cyan", "lime", "blue", "gold", "red"];
@@ -178,13 +244,24 @@ function startCryptoChart(currency1, currency2, currency3, currency4, currency5,
         }
     }, 2000);
 }
+/**
+ * Stops the live chart update interval if running
+ */
 function stopCryptoChart() {
     if (updateIntervalId !== null) {
         clearInterval(updateIntervalId);
         updateIntervalId = null;
     }
 }
-/*----------------------------------END-OF-renderPage4-Thank-God-----------------------------------------*/
+/* ───────────────────────────────────────────────
+   Collapser (More Info) content generator
+─────────────────────────────────────────────── */
+/**
+ * Generates HTML string for the collapsible price info section
+ * Displays image + current prices in USD, EUR, ILS
+ * @param currency - Currency object or null
+ * @returns HTML string for innerHTML
+ */
 function createCollapserContainer(currency) {
     const imgSrc = (currency?.image).large || '₵ryptonit€';
     /// **********THAT: "(currency?.image as any)" I did not quite understand, but it is the only thing that works//
@@ -197,7 +274,16 @@ function createCollapserContainer(currency) {
     </div>
   `;
 }
-//////////-----------------------------RENDERING_FUNCTIONS_MOTHER_FUCKER-----------------------------------//////
+/* ───────────────────────────────────────────────
+   Main currency card rendering
+─────────────────────────────────────────────── */
+/**
+ * Renders a list of currency cards inside the given monitor element
+ * Each card has symbol, name, More Info button, and toggle selection button
+ * Handles More Info caching (localStorage ~2 min) and toggle logic with 5-currency limit
+ * @param arr - Array of Currency objects to render
+ * @param monitor - Container element to append cards to
+ */
 function renderCurrencyList(arr, monitor) {
     arr.forEach(currency => {
         const card = document.createElement('div');
@@ -281,6 +367,11 @@ function renderCurrencyList(arr, monitor) {
         });
     });
 }
+/**
+ * Shows a popup when user tries to select a 6th currency
+ * Currently renders the 5 selected ones + Cancel button
+ * (Note: this is the part you want to enhance with Approve + toggles)
+ */
 function renderSelectedCards() {
     const existingFixed = document.querySelector('.fixed-container');
     if (existingFixed)
@@ -304,6 +395,14 @@ function renderSelectedCards() {
         renderCurrencyList(selectedCurrencies, fixedContainer);
     }
 }
+/* ───────────────────────────────────────────────
+   Single currency search (quick lookup by symbol)
+─────────────────────────────────────────────── */
+/**
+ * Searches for a currency by symbol (case-insensitive),
+ * shows floating modal with result or error message
+ * Clears previous search modal if exists
+ */
 async function search() {
     document.querySelector('.one-currency-monitor')?.remove();
     const inputSymbol = mainInput?.value.trim().toUpperCase();
@@ -336,9 +435,20 @@ async function search() {
     document.body.appendChild(oneCurrencyMonitor);
     mainInput.value = '';
 }
+/* ───────────────────────────────────────────────
+   Utility
+─────────────────────────────────────────────── */
+/**
+ * Clears all content from the main pages-monitor area
+ */
 function clearPagesFromMonitor() {
     pagesMonitor.innerHTML = '';
 }
+/**
+ * On window load:
+ * 1. Fetches full currency list from CoinGecko via manager
+ * 2. Renders the main list page (renderPage2)
+ */
 window.addEventListener('load', async () => {
     await manager.getCurrencyList();
     renderPage2();
