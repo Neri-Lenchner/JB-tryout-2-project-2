@@ -86,7 +86,6 @@ header {
   background-color: black;
   z-index: 2;
   padding: 0 ;
-
 }
 
 .nav-container {
@@ -96,7 +95,7 @@ header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0);  /* Or match your design */
+  background-color: rgba(0, 0, 0);
   width: 100%;
   box-sizing: border-box;
   border-top: 2px solid aquamarine;
@@ -142,6 +141,7 @@ header {
   box-shadow: 0 0 10px aquamarine;
   text-shadow: 0 0 2px aquamarine;
 }
+
 /*--------------------------------INPUT------------------------------------------*/
 
 .right-nav-input {
@@ -228,14 +228,8 @@ header {
   left: 3px;
   transform: translateX(20px) translateY(-50%);
 }
-/*
-.toggle-btn:focus {
-  outline: 2px solid #4CAF50;
-  outline-offset: 2px;
-}
-*/
-/* CARD */
 
+/* CARD */
 .card-container {
   position: relative;
 }
@@ -274,7 +268,6 @@ header {
 }
 
 /* CARD- more info button */
-
 .more-info-btn {
   font-weight: bold;
   background-color: green;
@@ -301,7 +294,6 @@ header {
 }
 
 /* CARD- more-info-button-collapser------ */
-
 .collapser > div {
   margin-bottom: 10px;
   color: lightgreen;
@@ -360,7 +352,7 @@ header {
   color: white;
   width: 100%;
   text-align: center;
-  text-shadow: 1px  1px 0 #000;
+  text-shadow: 1px  1px 0 black;
 }
 
 .one-currency-monitor{
@@ -489,8 +481,8 @@ header {
   color: white;
   text-shadow: 1px  1px 20px mediumspringgreen;
 }
-/*------------------------------------------progress-bar-stuff-----------------------------------------------*/
 
+/*------------------------------------------progress-bar-stuff-----------------------------------------------*/
 /* ===== Spinner container ===== */
 .progress-bar-container {
   position: fixed;
@@ -563,26 +555,22 @@ header {
   animation: spin 3.2s linear infinite;
 }
 
+/*-----pagee-4-container--*/
+#chartContainer {
+  height: 80vh;
+  width: 90vw;
+  margin: 40px auto;
+  background-color: black;
+  box-shadow: 0  0 30px mediumspringgreen;
+  border-radius: 5px;
+  padding: 20px;
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-/* Button */
-/*
-button {
-  padding: 12px 24px;
-  font-size: 18px;
-  background: black;
-  color: #FFD700;
-  border: 2px solid #FFD700;
-  cursor: pointer;
-}
-*/
-/*-------------------------render-page-4-stuff-blat---------------------*/
-
 /*------------@media------------*/
-
-
 @media (max-width: 768px) {
   .page-1-container-wrapper {
     min-width: 100% !important;
@@ -771,36 +759,15 @@ button {
     top: 0;
     right: -20px;
     scale: 0.7;
-
   }
-}
 
-/*-----pagee-4-container--*/
-#chartContainer {
-  height: 80vh;           /* גבוה – תופס 80% מגובה המסך */
-  width: 90vw;            /* רחב – 90% מרוחב המסך */
-  margin: 40px auto;
-  background-color: black;/* מרווח מלמעלה + מרכוז אופקי */
-  box-shadow: 0  0 30px mediumspringgreen;
-  border-radius: 5px;
-  padding: 20px;
-}
-
-/* Live Chart - Mobile & Tablet */
-@media (max-width: 768px) {
+  /* Live Chart - Mobile & Tablet */
   #chartContainer {
-    height: 40vh; /* קצת יותר נמוך במובייל */
-    width: 95vw; /* כמעט כל הרוחב */
-    margin: 30px auto; /* פחות מרווח מלמעלה */
+    height: 40vh;
+    width: 95vw;
+    margin: 30px auto;
   }
 }
 
-/*
- CSS STUFF Background props:
-    Background props for a fuckin great Background:
-    background-image: url(blue-space.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-*/
+
+
