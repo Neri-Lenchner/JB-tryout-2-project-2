@@ -7,7 +7,7 @@ import {Currency} from "./currency.model.js";
 /**
  * DOM references and event listeners setup
  */
-const pagesMonitor = document.getElementById('pages-monitor');
+const pagesMonitor: HTMLElement | null = document.getElementById('pages-monitor');
 
 /**
  * Main scrollable container reference (used for initial scroll position)
