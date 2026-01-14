@@ -101,7 +101,6 @@ searchButton.onclick = (): void => {
     stopCryptoChart();
   }
   search();
-  // console.log(oneCurrencyArr);   // ← this line can probably be removed too later
 };
 
 /**
@@ -185,7 +184,6 @@ function renderPage3(): void {
   pagesMonitor?.appendChild(page3Container);
 }
 
-/*-------------------------------------RENDER-PAGE-4-MOTHER-FUCKER!!!!!----------------------------------*/
 let chart: any; // that fucker comes from canvas js //
 let updateIntervalId: number | null = null;
 const maxPoints: number = 20;
@@ -317,7 +315,7 @@ function stopCryptoChart(): void {
  */
 function createCollapserContainer(currency: Currency | null): string {
   const imgSrc: string = (currency?.image as any).large || '₵ryptonit€';
-  /// **********THAT: "(currency?.image as any)" I did not quite understand, but it is the only thing that works//
+
   return `
     <div class="collapser">
       <img class="images" src="${imgSrc}">
@@ -405,8 +403,6 @@ function renderCurrencyList(arr: Currency[], monitor: HTMLElement | null): void 
       }
       collapserContainer.innerHTML = createCollapserContainer(currencyData);
     });
-
-    //-----------------------------Card-Toggle-Button-Stuff-bla-bla-bla-----------------------------///
 
     toggle?.addEventListener('click', (): void => {
 

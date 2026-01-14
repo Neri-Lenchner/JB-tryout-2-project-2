@@ -104,7 +104,6 @@ class Manager {
         coins: string[],
         apiKey?: string
     ): Promise<Record<string, { USD: number }> | undefined> {
-
         const url = apiKey
             ? `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${coins.join(',')}&tsyms=USD&api_key=${apiKey}`
             : `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${coins.join(',')}&tsyms=USD`;
@@ -136,7 +135,6 @@ class Manager {
      * Only adds the loader if it doesn't already exist in the DOM.
      * Called automatically before most fetch operations.
      */
-
     public show(): void {
       if (document.querySelector('.progress-bar-container')) return;
 
@@ -162,7 +160,6 @@ class Manager {
     public hide() {
       document.querySelector('.progress-bar-container')?.remove();
      }
-    ////////////---End-Of-Functions-Thank-God!--////////////
   }
 
 export const manager: Manager = new Manager();
