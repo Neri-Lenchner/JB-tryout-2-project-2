@@ -1,4 +1,3 @@
-// Global CanvasJS declaration (required for chart library)
 declare var CanvasJS: any;
 
 import { manager } from './manager.js';
@@ -86,6 +85,8 @@ liveReportsButton.onclick = (): void => {
     alert('Please select at list one currency');
     return;
   }
+  setTimeout(manager.hide, 2000);
+  manager.show();
   stopCryptoChart();
   clearPagesFromMonitor();
 

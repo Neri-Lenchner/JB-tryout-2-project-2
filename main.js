@@ -74,6 +74,8 @@ liveReportsButton.onclick = () => {
         alert('Please select at list one currency');
         return;
     }
+    setTimeout(manager.hide, 2000);
+    manager.show();
     stopCryptoChart();
     clearPagesFromMonitor();
     const symbols = selectedCurrencies.map(c => c.symbol.toUpperCase());
