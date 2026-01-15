@@ -176,7 +176,7 @@ function renderPage3(): void {
 
   const text: HTMLParagraphElement = document.createElement('p');
   text.className = 'about';
-  text.textContent = 'I am a young web developer who intends to integrate all the rich life experience he has accumulated, over the thousand years that have passed him, into the amazing humble art of web development. Born in 1977 and been making music most of my life, I see web development as a direct continuation of my previous occupation and I find this new occupation mind-blowing';
+  text.innerHTML = `I am a young web developer who intends to integrate all the rich life experience he has accumulated, over the thousand years that have passed him, into the amazing humble art of web development.<br> Born in 1977 and been making music most of my life, I see web development as a direct continuation of my previous occupation and I find this new occupation mind-blowing.`;
 
   const textWrapper: HTMLDivElement = document.createElement('div');
   textWrapper.className = 'about-wrapper';
@@ -514,6 +514,7 @@ async function search(): Promise<void> {
     message.innerText = 'That currency does not exist in the currencies you have selected';
     oneCurrencyMonitor.appendChild(message);
     document.body.appendChild(oneCurrencyMonitor);
+    mainInput!.value = '';
     return;
   }
 
