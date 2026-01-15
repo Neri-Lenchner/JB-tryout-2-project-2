@@ -239,7 +239,7 @@ function formatTimeLabel(e: { value: Date }): string {
 /**
  * Starts live updating line chart for up to 5 cryptocurrencies using CanvasJS
  * Fetches prices every 2 seconds via CryptoCompare, keeps only last 20 points
- * @param currency1..currency5 - Symbol strings (e.g. "BTC", "ETH")
+ * @param currency1.currency5 - Symbol strings (e.g. "BTC", "ETH")
  * @param apiKey - Optional CryptoCompare API key
  */
 function startCryptoChart(
