@@ -763,7 +763,7 @@ header {
 
   /* Live Chart - Mobile & Tablet */
   #chartContainer {
-    height: 40vh;
+    height: 50vh;
     width: 95vw;
     margin: 30px auto;
   }
