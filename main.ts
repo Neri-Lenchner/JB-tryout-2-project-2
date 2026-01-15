@@ -176,7 +176,11 @@ function renderPage3(): void {
 
   const text: HTMLParagraphElement = document.createElement('p');
   text.className = 'about';
-  text.innerHTML = `I am a young web developer who intends to integrate all the rich life experience he has accumulated, over the thousand years that have passed him, into the amazing humble art of web development.<br> Born in 1977 and been making music most of my life, I see web development as a direct continuation of my previous occupation and I find this new occupation mind-blowing.`;
+  text.innerHTML = `I am a young web developer who intends to integrate all the rich life experience he has accumulated, over the thousand years that have passed him, into the amazing humble art of web development.<br>
+Born in 1977 and having spent most of my life creating music, I see web development as a natural continuation of my artistic journey.<br>
+ Both fields require creativity, structure, rhythm, and emotional expression — just in different forms.<br>
+With a strong background in composition and sound design, I approach code the same way I approach music: building harmony between logic and creativity, crafting experiences that are both functional and expressive.<br>
+ This new path continues to inspire me, and I find the world of web development truly mind-blowing.`;
 
   const textWrapper: HTMLDivElement = document.createElement('div');
   textWrapper.className = 'about-wrapper';
