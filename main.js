@@ -354,29 +354,64 @@ function renderCurrencyList(arr, monitor) {
             }
             collapserContainer.innerHTML = createCollapserContainer(currencyData);
         });
+        //OPTION_1: pending sixth is toggled on if user toggled off one of the currencies in the fixed window ///////////
         toggle?.addEventListener('click', () => {
+            // If trying to add a 6th
             if (!currency.isOn && selectedCurrencies.length === 5) {
                 pendingSixth = currency;
-                renderSelectedCards();
+                renderSelectedCards(); // opens fixed window
                 return;
             }
             currency.isOn = !currency.isOn;
             if (currency.isOn) {
-                if (!selectedCurrencies.includes(currency))
-                    selectedCurrencies.push(currency);
+                selectedCurrencies.push(currency);
             }
             else {
                 const index = selectedCurrencies.indexOf(currency);
                 if (index !== -1)
                     selectedCurrencies.splice(index, 1);
-                pendingSixth = null;
+                // If user removed one WHILE a 6th is pending
+                if (pendingSixth) {
+                    pendingSixth.isOn = true;
+                    selectedCurrencies.push(pendingSixth);
+                    document
+                        .querySelectorAll(`.toggle-btn[data-currency-id="${pendingSixth.id}"]`)
+                        .forEach(btn => btn.classList.add('on'));
+                    pendingSixth = null; // clear pending
+                }
             }
-            const singleCurrencyToggleButtons = document.querySelectorAll(`.toggle-btn[data-currency-id="${currency.id}"]`);
-            singleCurrencyToggleButtons.forEach(btn => {
-                btn.classList.toggle('on', currency.isOn);
-            });
+            document
+                .querySelectorAll(`.toggle-btn[data-currency-id="${currency.id}"]`)
+                .forEach(btn => btn.classList.toggle('on', currency.isOn));
             renderSelectedCards();
         });
+        ///////OPTION_2: pending sixth do not toggled on even if user toggled off one of the toggles in the fixed window////
+        /*
+        toggle?.addEventListener('click', (): void => {
+    
+          if (!currency.isOn && selectedCurrencies.length === 5) {
+            pendingSixth = currency;
+            renderSelectedCards();
+            return;
+          }
+    
+          currency.isOn = !currency.isOn;
+    
+          if (currency.isOn) {
+            if (!selectedCurrencies.includes(currency)) selectedCurrencies.push(currency);
+          } else {
+            const index: number = selectedCurrencies.indexOf(currency);
+            if (index !== -1) selectedCurrencies.splice(index, 1);
+            pendingSixth = null;
+          }
+          const singleCurrencyToggleButtons: NodeListOf<HTMLButtonElement> = document.querySelectorAll(`.toggle-btn[data-currency-id="${currency.id}"]`);
+    
+          singleCurrencyToggleButtons.forEach(btn => {
+            btn.classList.toggle('on', currency.isOn);
+          });
+          renderSelectedCards();
+        });
+        */
     });
 }
 /**
