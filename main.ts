@@ -558,7 +558,7 @@ async function search(): Promise<void> {
 
     const message: HTMLDivElement = document.createElement('div');
     message.className = 'message-container';
-    message.innerText = 'That currency does not exist in the currencies you have selected';
+    message.innerText = 'That currency does not exist';
     oneCurrencyMonitor.appendChild(message);
     document.body.appendChild(oneCurrencyMonitor);
     mainInput!.value = '';
