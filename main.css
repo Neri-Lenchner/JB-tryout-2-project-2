@@ -103,11 +103,7 @@ header {
   box-shadow: 0 0 20px aquamarine;
 }
 
-.nav-left {
-  display: flex;
-  align-items: center;
-}
-
+.nav-left,
 .nav-right {
   display: flex;
   align-items: center;
@@ -176,7 +172,7 @@ header {
   box-shadow: 0 0 2px mediumpurple;
 }
 
-/* Page-2 content-- */
+/* Pages-monitor-- */
 .pages-monitor {
   display: flex;
   flex-wrap: wrap;
@@ -185,6 +181,8 @@ header {
   padding: 20px;
   background-color: black;
 }
+
+/* Page-2 content-- */
 
 /* -CARD AND BUTTONS--- */
 .toggle-btn {
@@ -328,6 +326,7 @@ header {
   margin: 10px 0;
 }
 
+/*-Fixed Container-S*/
 .fixed-container {
   scale: 0.7;
   width: 825px;
@@ -355,6 +354,33 @@ header {
   text-shadow: 1px  1px 0 black;
 }
 
+.close-button-cancel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 0 10px black;
+  transition: 0.2s ease;
+  padding: 10px 24px;
+}
+
+.close-button-cancel:active {
+  background-color: lawngreen;
+  box-shadow: 0 0 10px white;
+}
+
+.message-container {
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+}
+
+/*-One Currency Monitor*/
 .one-currency-monitor{
   background-image: url(blue-space.jpg);
   display: flex;
@@ -392,36 +418,10 @@ header {
   scale: 1.1;
 }
 
-.close-button-cancel {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  color: white;
-  background-color: black;
-  border: 1px solid white;
-  border-radius: 5px;
-  font-size: 20px;
-  font-weight: bold;
-  box-shadow: 0 0 10px black;
-  transition: 0.2s ease;
-  padding: 10px 24px;
-}
-
 .close-button-cancel:hover {
   background-color: green;
   box-shadow: 0 0 10px aliceblue;
   color: black;
-}
-
-.close-button-cancel:active {
-  background-color: lawngreen;
-  box-shadow: 0 0 10px white;
-}
-
-.message-container {
-  color: white;
-  font-size: 20px;
-  padding: 20px;
 }
 
 /*-------------------------Page_3------------------------------------------------------------*/
@@ -483,7 +483,7 @@ header {
 }
 
 /*------------------------------------------progress-bar-stuff-----------------------------------------------*/
-/* ===== Spinner container ===== */
+/*- Spinner container -*/
 .progress-bar-container {
   position: fixed;
   inset: 0;
@@ -494,7 +494,7 @@ header {
   z-index: 9999;
 }
 
-/* ===== Loader ===== */
+/*- Loader -*/
 .currency-loader {
   position: relative;
   width: 150px;
@@ -555,7 +555,7 @@ header {
   animation: spin 3.2s linear infinite;
 }
 
-/*-----pagee-4-container--*/
+/*-----page-4-container--*/
 #chartContainer {
   height: 80vh;
   width: 90vw;
@@ -565,6 +565,8 @@ header {
   border-radius: 5px;
   padding: 20px;
 }
+
+/*- Progress Bar Animation -*/
 
 @keyframes spin {
   to { transform: rotate(360deg); }
