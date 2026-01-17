@@ -382,18 +382,17 @@ header {
 
 /*-One Currency Monitor*/
 .one-currency-monitor{
-  background-image: url(blue-space.jpg);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   position: fixed;
   top: 14vh;
-  left: 0;
+  left: 5px;
   border-radius: 10px;
   box-shadow: 0 0 10px white;
   border: none;
   min-height: 100px;
-  background-color: white;
   padding: 30px 5px 5px 5px;
   overflow-y: auto;
   scrollbar-width: none;

@@ -150,7 +150,7 @@ function renderPage3() {
     title.textContent = 'About-Me';
     const text = document.createElement('p');
     text.className = 'about';
-    text.innerHTML = `I am a young web developer who intends to integrate all the rich life experience he has accumulated, over the thousand years that have passed him, into the amazing humble art of web development.<br>
+    text.innerHTML = `I am a young Fullstack developer who intends to integrate all the rich life experience he has accumulated, over the thousand years that have passed him, into the amazing humble art of web development.<br>
 Born in 1977 and having spent most of my life creating music, I see web development as a natural continuation of my artistic journey.<br>
  Both fields require creativity, structure, rhythm, and emotional expression just in different forms.<br>
 With a strong background in composition and sound design, I approach code the same way I approach music: building harmony between logic and creativity, crafting experiences that are both functional and expressive.<br>
