@@ -69,7 +69,7 @@ class Manager {
 
     public async getOneCurrency(id: string): Promise<Currency | null> {
 
-        const currency: Currency | undefined = this.currencyList.find(currency => currency.id === id);
+        // const currency: Currency | undefined = this.currencyList.find(currency => currency.id === id);
         this.show();
         const response: Response = await fetch(
           `https://api.coingecko.com/api/v3/coins/${id}`
@@ -107,11 +107,11 @@ class Manager {
         coins: string[],
         apiKey?: string
     ): Promise<Record<string, { USD: number }> | undefined> {
-        const url = apiKey
+        const url: string = apiKey
             ? `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${coins.join(',')}&tsyms=USD&api_key=${apiKey}`
             : `https://min-api.cryptocompare.com/data/pricemulti?fsyms=${coins.join(',')}&tsyms=USD`;
 
-        const res = await fetch(url);
+        const res: Response = await fetch(url);
 
         if (!res.ok) {
             console.error("Failed to fetch prices:", res.status, res.statusText);
@@ -165,4 +165,4 @@ class Manager {
      }
   }
 
-export const manager: Manager = new Manager();
+export const manager: Manager = new Manager(); // Manager singleton

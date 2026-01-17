@@ -40,7 +40,7 @@ class Manager {
      * @returns {Promise<Currency | null>} The detailed Currency object or null if fetch fails
      */
     async getOneCurrency(id) {
-        const currency = this.currencyList.find(currency => currency.id === id);
+        // const currency: Currency | undefined = this.currencyList.find(currency => currency.id === id);
         this.show();
         const response = await fetch(`https://api.coingecko.com/api/v3/coins/${id}`);
         if (!response.ok) {
@@ -109,5 +109,5 @@ class Manager {
         document.querySelector('.progress-bar-container')?.remove();
     }
 }
-export const manager = new Manager();
+export const manager = new Manager(); // Manager singleton
 //# sourceMappingURL=manager.js.map
