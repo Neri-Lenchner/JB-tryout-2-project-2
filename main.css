@@ -556,7 +556,7 @@ header {
 
 /*-----page-4-container--*/
 #chartContainer {
-  height: 80vh;
+  height: 60vh;
   width: 90vw;
   margin: 40px auto;
   background-color: black;
