@@ -243,7 +243,7 @@ function formatTimeLabel(e: { value: Date }): string {
  * @param currency1.currency5 - Symbol strings (e.g. "BTC", "ETH")
  * @param apiKey - Optional CryptoCompare API key
  */
-// I needed help (maybe a lot of it) on that one, with understanding how the CanvasJS.Chart works, and also needed help in-
+// I had to use some AI help on that one, with understanding how the CanvasJS.Chart works, and also needed help in-
 // the calculations needed here, so I used grok and gpt for that.
 // eventually I used only canvasJS without jQuery because it made it more understandable for me-
 // and I could manipulate the graph more easily :
@@ -392,8 +392,7 @@ function renderCurrencyList(arr: Currency[], monitor: HTMLElement | null): void 
 
     toggle?.classList.toggle('on', currency.isOn);
 
-    ///--More-Info_button-fuckin-functionality-blat--//-mui-importanto-////
-
+    // I used card.querySelector here to pick a specific card:
     moreInfoBtn?.addEventListener('click', async (): Promise<void> => {
 
       let collapserContainer: HTMLDivElement | null = cardContainer.querySelector('.collapser-container');
@@ -499,8 +498,9 @@ function renderCurrencyList(arr: Currency[], monitor: HTMLElement | null): void 
   });
 }
 
-// I have had some issues with the one above, but eventually decided that this is the best way to display that window, and
-// it's functionality.
+// I have had some issues with those two above, and with deciding what is the best
+// way to make its functionality
+// but eventually decided that this is the best way to display it.
 
 /**
  * Shows a popup when user tries to select a 6th currency
