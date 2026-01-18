@@ -235,12 +235,14 @@ function startCryptoChart(currency1, currency2, currency3, currency4, currency5,
         axisX: {
             valueFormatString: "HH:mm:ss",
             labelFormatter: formatTimeLabel,
-            labelFontColor: "mediumspringgreen"
+            labelFontColor: "mediumspringgreen",
+            maximumLabels: 5,
         },
         axisY: {
             includeZero: false,
             labelFormatter: addSymbols,
-            labelFontColor: "mediumspringgreen"
+            labelFontColor: "mediumspringgreen",
+            maximumLabels: 7, // at most 7 labels visible
         },
         toolTip: { shared: true },
         legend: { fontColor: "mediumspringgreen", fontSize: 13 },

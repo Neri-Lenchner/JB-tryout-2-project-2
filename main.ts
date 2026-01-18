@@ -279,12 +279,14 @@ function startCryptoChart(
     axisX: {
       valueFormatString: "HH:mm:ss",
       labelFormatter: formatTimeLabel,
-      labelFontColor: "mediumspringgreen"
+      labelFontColor: "mediumspringgreen",
+      maximumLabels: 5,
     },
     axisY: {
       includeZero: false,
       labelFormatter: addSymbols,
-      labelFontColor: "mediumspringgreen"
+      labelFontColor: "mediumspringgreen",
+      maximumLabels: 7,       // at most 7 labels visible
     },
     toolTip: { shared: true },
     legend: { fontColor: "mediumspringgreen", fontSize: 13 },
