@@ -208,6 +208,10 @@ function formatTimeLabel(e) {
  * @param currency1.currency5 - Symbol strings (e.g. "BTC", "ETH")
  * @param apiKey - Optional CryptoCompare API key
  */
+// I needed help (maybe a lot of it) on that one, with understanding how the CanvasJS.Chart works, and also needed help in-
+// the calculations needed here, so I used grok and gpt for that.
+// eventually I used only canvasJS without jQuery because it made it more understandable for me-
+// and I could manipulate the graph more easily :
 function startCryptoChart(currency1, currency2, currency3, currency4, currency5, apiKey) {
     const coins = [currency1, currency2, currency3, currency4, currency5];
     const colors = ["cyan", "lime", "blue", "gold", "red"];
@@ -360,6 +364,7 @@ function renderCurrencyList(arr, monitor) {
             }
             collapserContainer.innerHTML = createCollapserContainer(currencyData);
         });
+        // I have left a second version of this function commented out:
         //OPTION_1: pending sixth is toggled on if user toggled off one of the currencies in the fixed window ///////////
         toggle?.addEventListener('click', () => {
             // If trying to add a 6th
@@ -420,10 +425,11 @@ function renderCurrencyList(arr, monitor) {
         */
     });
 }
+// I have had some issues with the one above, but eventually decided that this is the best way to display that window, and
+// it's functionality.
 /**
  * Shows a popup when user tries to select a 6th currency
- * Currently renders the 5 selected ones + Cancel button
- * (Note: this is the part you want to enhance with Approve + toggles)
+ * renders the 5 selected ones + Cancel button
  */
 function renderSelectedCards() {
     const existingFixed = document.querySelector('.fixed-container');

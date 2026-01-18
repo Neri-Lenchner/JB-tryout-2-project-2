@@ -67,7 +67,7 @@ homeButton.onclick = (): void => {
   clearPagesFromMonitor();
   if (manager.currencyList.length > 100) {
     manager.show();
-    setTimeout(() => {
+    setTimeout((): void => {
       renderPage2();
       manager.hide();
     }, 600);
@@ -221,7 +221,7 @@ function addSymbols(e: { value: number }): string {
   const suffixes: string[] = ["", "K", "M", "B"];
   let order: number = Math.max(Math.floor(Math.log(Math.abs(e.value)) / Math.log(1000)), 0);
   if (order > suffixes.length - 1) order = suffixes.length - 1;
-  const formattedValue = CanvasJS.formatNumber(e.value / Math.pow(1000, order));
+  const formattedValue: number = CanvasJS.formatNumber(e.value / Math.pow(1000, order));
   return "$" + formattedValue + suffixes[order];
 }
 
@@ -243,6 +243,10 @@ function formatTimeLabel(e: { value: Date }): string {
  * @param currency1.currency5 - Symbol strings (e.g. "BTC", "ETH")
  * @param apiKey - Optional CryptoCompare API key
  */
+// I needed help (maybe a lot of it) on that one, with understanding how the CanvasJS.Chart works, and also needed help in-
+// the calculations needed here, so I used grok and gpt for that.
+// eventually I used only canvasJS without jQuery because it made it more understandable for me-
+// and I could manipulate the graph more easily :
 function startCryptoChart(
     currency1: string,
     currency2: string,
@@ -424,6 +428,8 @@ function renderCurrencyList(arr: Currency[], monitor: HTMLElement | null): void 
       collapserContainer.innerHTML = createCollapserContainer(currencyData);
     });
 
+    // I have left a second version of this function commented out:
+
     //OPTION_1: pending sixth is toggled on if user toggled off one of the currencies in the fixed window ///////////
 
     toggle?.addEventListener('click', () => {
@@ -493,10 +499,12 @@ function renderCurrencyList(arr: Currency[], monitor: HTMLElement | null): void 
   });
 }
 
+// I have had some issues with the one above, but eventually decided that this is the best way to display that window, and
+// it's functionality.
+
 /**
  * Shows a popup when user tries to select a 6th currency
- * Currently renders the 5 selected ones + Cancel button
- * (Note: this is the part you want to enhance with Approve + toggles)
+ * renders the 5 selected ones + Cancel button
  */
 function renderSelectedCards(): void {
   const existingFixed: HTMLDivElement | null = document.querySelector('.fixed-container');
