@@ -242,7 +242,7 @@ function startCryptoChart(currency1, currency2, currency3, currency4, currency5,
             includeZero: false,
             labelFormatter: addSymbols,
             labelFontColor: "mediumspringgreen",
-            maximumLabels: 7, // at most 7 labels visible
+            maximumLabels: 7
         },
         toolTip: { shared: true },
         legend: { fontColor: "mediumspringgreen", fontSize: 13 },
