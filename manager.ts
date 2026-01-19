@@ -69,7 +69,6 @@ class Manager {
 
     public async getOneCurrency(id: string): Promise<Currency | null> {
 
-        // const currency: Currency | undefined = this.currencyList.find(currency => currency.id === id);
         this.show();
         const response: Response = await fetch(
           `https://api.coingecko.com/api/v3/coins/${id}`

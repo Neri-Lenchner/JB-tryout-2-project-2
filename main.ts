@@ -204,7 +204,7 @@ With a strong background in composition and sound design, I approach code the sa
   pagesMonitor?.appendChild(page3Container);
 }
 
-let chart: any; // that fucker comes from canvas js //
+let chart: any; // that one comes from canvas js //
 let updateIntervalId: number | null = null;
 const maxPoints: number = 20;
 
@@ -502,7 +502,7 @@ function renderCurrencyList(arr: Currency[], monitor: HTMLElement | null): void 
 
 // I have had some issues with those two above, and with deciding what is the best
 // way to make its functionality
-// but eventually decided that this is the best way to display it.
+// but eventually decided that this is the best way to display it considering the task itself.
 
 /**
  * Shows a popup when user tries to select a 6th currency
@@ -548,6 +548,8 @@ function renderSelectedCards(): void {
  * Clears previous search modal if exists
  */
 async function search(): Promise<void> {
+  const oneCurrencyMonitor: HTMLDivElement = document.createElement('div');
+  oneCurrencyMonitor.className = 'one-currency-monitor';
   document.querySelector('.one-currency-monitor')?.remove();
 
   const inputSymbol: string | undefined = mainInput?.value.trim().toUpperCase();
@@ -558,14 +560,11 @@ async function search(): Promise<void> {
   );
 
   if (!currency) {
-    const oneCurrencyMonitor: HTMLDivElement = document.createElement('div');
-    oneCurrencyMonitor.className = 'one-currency-monitor';
     const closeButton: HTMLButtonElement = document.createElement('button');
     closeButton.className = 'close-button';
     closeButton.innerHTML = 'X';
     closeButton.addEventListener('click', (): void => oneCurrencyMonitor.remove());
     oneCurrencyMonitor.appendChild(closeButton);
-
     const message: HTMLDivElement = document.createElement('div');
     message.className = 'message-container';
     message.innerText = 'That currency does not exist';
@@ -575,8 +574,7 @@ async function search(): Promise<void> {
     return;
   }
 
-  const oneCurrencyMonitor: HTMLDivElement = document.createElement('div');
-  oneCurrencyMonitor.className = 'one-currency-monitor';
+
 
   const closeButton: HTMLButtonElement = document.createElement('button');
   closeButton.className = 'close-button';
